@@ -11,6 +11,8 @@ from src.model.exception.DecodeException import DecodeException
 from src.model.exception.FetchException import FetchException
 
 
+logger = logging.getLogger('ungoliant')
+
 class UrlFetcher(Fetcher):
     '''
     classdocs
@@ -70,7 +72,7 @@ class UrlFetcher(Fetcher):
         if not url:
             raise Exception("URL can not be null")
 
-        logging.debug( "About to fetch url %s" % url)
+        logger.debug( "About to fetch url %s" % url)
                 
         req = self.create_request(url)
         
@@ -79,13 +81,13 @@ class UrlFetcher(Fetcher):
             content  = response.read()
             response.close()
         except FetchException:
-            logging.warn("Error in fetch: %s" %url)
+            logger.warn("Error in fetch: %s" %url)
             raise FetchException("Error trying to fetch %s" % url)
         try:
             decoded = self.decode(content)
             return decoded
         except DecodeException:
-            logging.warn("Error trying to decode %s" % url)
+            logger.warn("Error trying to decode %s" % url)
             return None
         
     def finish(self):

@@ -13,6 +13,9 @@ from selenium.common.exceptions import TimeoutException
 from time import sleep
 from src.model.fetcher.Fetcher import Fetcher
 
+logger = logging.getLogger('ungoliant')
+
+
 class JSFetcher(Fetcher):
     '''
     classdocs
@@ -33,7 +36,7 @@ class JSFetcher(Fetcher):
         #elegir un tiempo de espera mas corto o arreglar el tiempo de espera implicito o usar correctamente el webdriverwait
         
         self.driver = self.initialize_phantom()
-        logging.debug("About to fetch url %s" % url)
+        logger.debug("About to fetch url %s" % url)
         try:
             self.driver.get(url)
             html = self.driver.page_source        
@@ -41,10 +44,10 @@ class JSFetcher(Fetcher):
             return content
 
         except TimeoutException as e:
-            logging.warn("url can not be loaded correctly: %s" %url)
+            logger.warn("url can not be loaded correctly: %s" %url)
             return None
         except Exception as e:
-            logging.warn("Error at fetching with phantomjs")
+            logger.warn("Error at fetching with phantomjs")
             return None
 
     def set_proxy(self,proxy):

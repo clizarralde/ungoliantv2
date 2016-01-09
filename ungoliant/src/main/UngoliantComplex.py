@@ -7,11 +7,15 @@ from src.main.Sites import sites
 from src.model.Ungoliant import Ungoliant
 from src.model.fetcher.JSFetcher import JSFetcher
 from src.model.crawler.ComplexCrawler import ComplexCrawler
+import logging
 
 
 
 
 if __name__ == '__main__':
+
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    logger = logging.getLogger('ungoliant')
 
     url_sites = sites.keys()
     site = sites[url_sites[1]]

@@ -7,6 +7,8 @@ Created on Jan 3, 2016
 import logging
 from src.model.crawler.Crawler import Crawler
 
+logger = logging.getLogger('ungoliant')
+
 class ComplexCrawler(Crawler):
     '''
     classdocs
@@ -21,7 +23,7 @@ class ComplexCrawler(Crawler):
         
     def crawl(self, spider):
 
-        logging.debug("Starting the crawl")
+        logger.info("Starting the crawl")
 
         next_page = spider.fetch(spider.get_url_config().start_url())
         
@@ -56,7 +58,7 @@ class ComplexCrawler(Crawler):
                         break
                     
                 except Exception as e:
-                    logging.warn( "Error in first try-catch when fetching %s" % url)
+                    logger.warn( "Error in first try-catch when fetching %s" % url)
             next_page = None
             
             if stack:
@@ -65,12 +67,12 @@ class ComplexCrawler(Crawler):
                 try:
                     next_page = spider.fetch(next_url)
                 except Exception as e:
-                    logging.warn( "Error in second try-catch when fetching %s" % next_url)
+                    logger.warn( "Error in second try-catch when fetching %s" % next_url)
                     
         spider.store(output)
         spider.finish()
         
-        logging.debug("Finishing the crawl")
+        logger.info("Finishing the crawl")
         
         
         return crawled_links

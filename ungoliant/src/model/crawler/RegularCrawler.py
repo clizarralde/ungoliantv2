@@ -7,6 +7,9 @@ Created on Jan 3, 2016
 import logging
 from src.model.crawler.Crawler import Crawler
 
+logger = logging.getLogger('ungoliant')
+
+
 class RegularCrawler(Crawler):
     '''
     classdocs
@@ -20,7 +23,7 @@ class RegularCrawler(Crawler):
     
     def crawl(self, spider):
         
-        logging.debug("Starting the crawl")
+        logger.info("Starting the crawl")
         stack = []
         crawled_links = []
         visited = []
@@ -55,11 +58,11 @@ class RegularCrawler(Crawler):
                             for url in urls:    
                                 stack.append(url)
             except Exception as e:
-                logging.warn("Error when fetching %s" % new_url)
+                logger.warn("Error when fetching %s" % new_url)
 
         spider.store(output)
         spider.finish()
         
-        logging.debug("Finishing the crawl")
+        logger.info("Finishing the crawl")
         
         return crawled_links

@@ -19,12 +19,11 @@ class UrlFilter(object):
         La idea es retornar una lista filtrada de links donde solo pasan los links que son 
         relevantes al arbol de navegacion. Es decir, que cumplen con la base_url regexp. 
         '''
-        # aca hay que usar una REGEXP
     
         url_list = []
         
         for link in links:
-            #should be a regexp
+
             url = link['href']
             full_url = url_config.full_url(url)
             if self.satisfy(url_config, full_url):

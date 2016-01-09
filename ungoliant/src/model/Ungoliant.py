@@ -7,7 +7,18 @@ from src.model.crawler.RegularCrawler import RegularCrawler
 class Ungoliant:
     
     def __init__(self, site_config, logfile=None, logger=None, fetcher=UrlFetcher(), extractor=PageExtractor(), url_filter=UrlFilter(),crawler=RegularCrawler(), scraper=None, storer=None):
-        
+        '''
+        Constructor
+        @param  site_config: es un objeto de la clase SiteConfiguration
+                logfile = idk
+                logger = idk
+                fetcher = es un objeto de la clase Fetcher
+                extractor = es de la clase PageExtractor
+                url_filter = es de la clase UrlFilter
+                crawler = es un objeto de la clase Crawler
+                scraper = to do
+                storer = to do
+        '''
         self.logfile = logfile
         self.logger =  logger
 
@@ -73,6 +84,9 @@ class Ungoliant:
         self.site_config.set_config(config)
     
     def get_url_config(self):
+        '''
+        @return: devuelve la configuracion de la url del sitio
+        '''
         return self.site_config.get_config()
     
     def set_proxy(self, proxy):
@@ -102,9 +116,16 @@ class Ungoliant:
         self.max_crawl = max_links
     
     def get_max_crawl(self):
+        '''
+        @return: devuelve el maximo numero de paginas a crawlear. default es 0
+        '''
         return self.max_crawl
     
     def finish(self):
+        '''
+        to do
+        se tiene que hacer algo al terminar de crawlear
+        '''
         self.fetcher.finish()
     
     def crawl(self):
